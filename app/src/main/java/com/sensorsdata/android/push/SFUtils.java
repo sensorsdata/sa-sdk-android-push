@@ -118,9 +118,9 @@ public class SFUtils {
             }
             JSONObject properties = new JSONObject();
             // 获取消息标题，并保存在事件属性 msg_title 中
-            properties.put("$msg_title", notificationTitle);
+            properties.put("$sf_msg_title", notificationTitle);
             // 获取消息 ID，并保存在事件属性 msg_id 中
-            properties.put("$msg_content", notificationContent);
+            properties.put("$sf_msg_content", notificationContent);
             if (jsonObject != null) {
                 properties.put("$sf_msg_id", jsonObject.optString("sf_msg_id"));
                 properties.put("$sf_plan_id", jsonObject.optString("sf_plan_id"));
