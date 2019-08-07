@@ -60,8 +60,8 @@ public class UmengHelper {
     }
 
     /**
-     * 若开发者要使用自定义消息，则需重在自定义 Application 类的 onCreate() 中重写 dealWithCustomMessage() 方法，
      * 自定义消息的内容存放在 UMessage.custom 字段里。拦截自定义参数根据友盟官网介绍在 getNotification 中拦截。
+     * 参照友盟官方文档：https://developer.umeng.com/docs/66632/detail/98583#h2--10
      *
      * @param pushAgent PushAgent
      */
@@ -94,9 +94,17 @@ public class UmengHelper {
                 for (Map.Entry entry : uMessage.extra.entrySet()) {
                     Object key = entry.getKey();
                     Object value = entry.getValue();
+                    /*
+                     * 解析出 sf_data 字段，然后做自定义处理
+                     */
                     if (SFConstant.SF_DATA.equals(key)) {
+                        // 为了测试收到的内容效果，发送广播给页面展示使用，仅测试使用。
                         SFUtils.sendBroadcast(context, SFConstant.PUSH_TYPE_UMENG, key + ":" + value);
+                        // 解析 sf 中的字段，然后做一些自定义操作，本例中是模拟，开发者需要根据自己的实际需求实现。
                         SFUtils.handleSFConfig(context, value.toString());
+                        /*
+                         * 当点击通知打开 App 时，需要上报一个 "AppOpenNotification" 事件，此处假定当前是从 launchApp 调用过来的
+                         */
                         SFUtils.trackAppOpenNotification(context, value.toString(), uMessage.msg_id, uMessage.title, uMessage.text);
                     }
                 }

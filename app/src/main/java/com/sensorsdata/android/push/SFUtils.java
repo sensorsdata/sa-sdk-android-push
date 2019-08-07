@@ -25,7 +25,8 @@ public class SFUtils {
     private static final String LAND_TYPE_CUSTOMIZED = "CUSTOMIZED";
 
     /**
-     * 处理 SF 配置的操作
+     * 解析处理 SF 配置的操作，此处仅仅是模拟一些关键字段的解析的展示，具体的业务实现还要开发者根据
+     * 自己的业务需求去实现。
      *
      * @param context Context
      * @param sfData 配置
@@ -184,7 +185,7 @@ public class SFUtils {
     }
 
     /**
-     * 判断 App 是否在前台，仅供参考
+     * 判断 App 是否在前台，仅供参考测试使用
      * @param context Context
      * @return true,在前台 false，在后台
      */
