@@ -20,7 +20,6 @@ package com.sensorsdata.android.push.jpush;
 import android.content.Context;
 
 import com.sensorsdata.android.push.SFLogger;
-import com.sensorsdata.android.push.SFUtils;
 
 import cn.jpush.android.api.CmdMessage;
 import cn.jpush.android.api.CustomMessage;
@@ -30,6 +29,7 @@ import cn.jpush.android.service.JPushMessageReceiver;
 
 /**
  * 自定义 JPush message 接收器,包括操作 tag/alias 的结果返回(仅仅包含 tag/alias 新接口部分)
+ * 如果使用该类同时为了自己老的 BroadcastReceiver 能否收到广播，则必须在回调方法中调用 super 方法。
  */
 public class MyJPushMessageReceiver extends JPushMessageReceiver {
     private static final String TAG = "MyJPushMessageReceiver";
@@ -73,7 +73,8 @@ public class MyJPushMessageReceiver extends JPushMessageReceiver {
         SFLogger.d(TAG, "onNotifyMessageOpened");
         super.onNotifyMessageOpened(context, notificationMessage);
         /**
-         * 对于极光 3.0.0 以后的版本，可以在这里处理通知打开的操作
+         * 对于极光 3.0.0 以后的版本，可以在这里处理通知打开的操作，此处仅仅演示了 sf_data 推送的相关字段，注意，如果你有原有的逻辑也有相关处理
+         *      * 的逻辑，你需要做一定的兼容处理。
          */
         //SFUtils.trackAppOpenNotification(context, SFUtils.readSFConfig(notificationMessage.notificationExtras), String.valueOf(notificationMessage.notificationId), notificationMessage.notificationTitle, notificationMessage.notificationContent);
         //SFUtils.handleSFConfig(context, SFUtils.readSFConfig(notificationMessage.notificationExtras));

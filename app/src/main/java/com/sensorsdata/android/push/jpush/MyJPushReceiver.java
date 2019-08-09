@@ -27,6 +27,9 @@ public class MyJPushReceiver extends BroadcastReceiver {
         try {
             Bundle bundle = intent.getExtras();
             SFLogger.d(TAG, "[MyJPushReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+            /**
+             * 此处仅仅演示了 sf_data 推送的相关字段，注意，如果你有原有的逻辑也有相关处理的逻辑，你需要做一定的兼容处理。
+             */
             readBundleConfig(bundle);
             if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
                 String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
@@ -48,6 +51,13 @@ public class MyJPushReceiver extends BroadcastReceiver {
                 SFLogger.d(TAG, "[MyJPushReceiver] 接收到推送下来的通知的 ID: " + notifactionId);
                 // 处理 Extra 字段
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
+                /**
+                 * 如果开发者在 AndroidManifest.xml 里未配置此 receiver action，那么，
+                 * SDK 会默认打开应用程序的主 Activity，相当于用户点击桌面图标的效果。
+                 *
+                 * 如果开发者在 AndroidManifest.xml 里配置了此 receiver action，那么，
+                 * 当用户点击通知时，SDK 不会做动作。开发者应该在自己写的 BroadcastReceiver 类里处理，比如打开某 Activity 。
+                 */
                 SFLogger.d(TAG, "[MyJPushReceiver] 用户点击打开了通知");
                 /*
                  * 用户点击通知，需要处理两个操作：

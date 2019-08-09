@@ -84,6 +84,12 @@ public class UmengHelper {
         pushAgent.setMessageHandler(messageHandler);
     }
 
+    /**
+     * 该方法是解析处理友盟推送的相关参数，此处仅仅演示了 sf_data 推送的相关字段，注意，如果你有原有的逻辑也有相关处理
+     * 的逻辑，你需要做一定的兼容处理。
+     * @param context Context
+     * @param uMessage UMessage
+     */
     private static void handleUmengMessage(Context context, UMessage uMessage) {
         try {
             if (uMessage == null) return;

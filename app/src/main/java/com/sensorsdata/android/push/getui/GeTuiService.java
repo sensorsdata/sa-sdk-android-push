@@ -46,7 +46,8 @@ public class GeTuiService extends GTIntentService {
     public void onReceiveMessageData(Context context, GTTransmitMessage gtTransmitMessage) {
         SFLogger.d(TAG, "onNotificationMessageArrived");
         /*
-         * 透传消息的处理
+         * 透传消息的处理，此处仅仅演示了 sf_data 推送的相关字段，注意，如果你有原有的逻辑也有相关处理
+         * 的逻辑，你需要做一定的兼容处理。
          */
         String appid = gtTransmitMessage.getAppid();
         String taskid = gtTransmitMessage.getTaskId();
